@@ -27,11 +27,12 @@ import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbTransient;
 
 import org.eclipse.microprofile.graphql.Description;
+import org.eclipse.microprofile.graphql.InputField;
 import org.eclipse.microprofile.graphql.NonNull;
 import org.eclipse.microprofile.graphql.Query;
 
 
-public class SuperHero {
+public class SuperHero implements Character {
     private List<Team> teamAffiliations;
     private List<String> superPowers;
     private String primaryLocation;
@@ -56,6 +57,9 @@ public class SuperHero {
 
     @JsonbNumberFormat("0000,0000")
     private Long idNumber;
+
+    @InputField("tshirtSize")
+    private Integer sizeOfTShirt;
 
     public SuperHero(){
     }
@@ -86,6 +90,7 @@ public class SuperHero {
         return primaryLocation;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -107,6 +112,7 @@ public class SuperHero {
         this.primaryLocation = primaryLocation;
     }
 
+    @Override
     @NonNull
     public void setName(String name) {
         this.name = name;
@@ -172,5 +178,13 @@ public class SuperHero {
 
     public void setTimeOfLastBattle(LocalDateTime timeOfLastBattle) {
         this.timeOfLastBattle = timeOfLastBattle;
+    }
+
+    public Integer getSizeOfTShirt() {
+        return sizeOfTShirt;
+    }
+
+    public void setSizeOfTShirt(Integer sizeOfTShirt) {
+        this.sizeOfTShirt = sizeOfTShirt;
     }
 }
